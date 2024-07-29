@@ -17,8 +17,9 @@ namespace SharpZstd
         private bool _leaveEncoderOpen;
         private Stream _stream;
         private bool _leaveStreamOpen;
-        private byte[] _buffer;
+
         private int _activeAsyncOperation; // 1 == true, 0 == false
+        private byte[] _buffer;
 
         public ZstdEncoderStream(ZstdEncoder encoder, bool leaveEncoderOpen, Stream stream, bool leaveStreamOpen)
         {
@@ -26,6 +27,7 @@ namespace SharpZstd
             _leaveEncoderOpen = leaveEncoderOpen;
             _stream = stream ?? throw new ArgumentNullException(nameof(stream));
             _leaveStreamOpen = leaveStreamOpen;
+
             _buffer = ArrayPool<byte>.Shared.Rent(DefaultBufferSize);
         }
 
